@@ -1,21 +1,12 @@
-
----
-
-### **Option 2: Table (Markdown)**  
-A table format is clean and easy to read in Markdown:
-
-```markdown
-# Complete Road Map to Prepare NLP
-
-| Level                          | Techniques/Tools                                               |
-|--------------------------------|----------------------------------------------------------------|
-| **10.** BERT                   |                                                                |
-| **9.** Transformers            |                                                                |
-| **8.** Bidirectional LSTM, RNN | Encoders, Decoders, Attention Models                          |
-| **7.** Word Embeddings         | Word2Vec                                                      |
-| **6.** Understanding RNN       | LSTM, GRU                                                     |
-| **5.** Understanding ANN       |                                                                |
-| **4.** Solve ML Use Cases      |                                                                |
-| **3.** Text Preprocessing 3    | Gensim, Word2Vec, AvgWord2Vec                                 |
-| **2.** Text Preprocessing 2    | Bag of Words, TFIDF, Unigrams, Bigrams, n-grams               |
-| **1.** Text Preprocessing 1    | Tokenization, Lemmatization, Stop Words                      |
+NLP Roadmap: Techniques and Tools
+Level	Techniques/Tools	Purpose/Key Concepts
+10	BERT	Contextual embeddings for NLP tasks.
+9	Transformers	Foundation of modern NLP models (e.g., attention mechanisms).
+8	Bidirectional LSTM, RNN	Encoders, decoders, and attention models for sequence processing.
+7	Word Embeddings, Word2Vec	Representing text as dense vector representations.
+6	Understanding RNN (LSTM, GRU)	Sequence modeling for time-dependent data.
+5	Understanding ANN	Fundamental concepts of artificial neural networks.
+4	Solve Machine Learning Use Cases	Applying ML techniques to practical problems.
+3	Text Preprocessing Level 3 (Gensim, Word2Vec)	Advanced preprocessing for feature extraction and modeling.
+2	Text Preprocessing Level 2 (Bag of Words, TFIDF, etc.)	Intermediate techniques for feature engineering.
+1	Text Preprocessing Level 1 (Tokenization, etc.)	Basic preprocessing to clean and prepare text data for analysis.
