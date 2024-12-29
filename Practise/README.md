@@ -1,5 +1,9 @@
 
-  
+---
+
+### **Option 2: Table (Markdown)**  
+A table format is clean and easy to read in Markdown:
+
 ```markdown
 # Complete Road Map to Prepare NLP
 
