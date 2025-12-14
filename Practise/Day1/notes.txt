@@ -1,0 +1,112 @@
+text processing is process of cleaning data
+- Tokenasation is process of converting a sentences into words
+- stopwords is removing innecessary words in sentences like in, on ...
+- stemming vs lemmatization  is process of converting words into its base word (root word) (emailing = email)
+
+stemming used in tasks like text review, detect spamming, faster, simpler while lemmatization is used for tasks like requiring deep text understanding (chatbots) and i  ts more accurate but slower
+
+
+*  step 1 is using tokenezation >> stopwords >> stemming >> lemmatization
+*  step 2 is convert words into vectors
+
+there is multiple technique for step two : OHE (one hot encoding), BOW(bag of words), TF-IDF (term frequency- inverse documents frequency), and word2vec
+
+1 - OHE :  d1 = [cat eat food] , d2 = [dog eat meat] we put unique words apart like : cat, eat, food, dog, meat  then replace by 0 or 1 existing word on d1 like on d1 = [1,0,0], [0,1,0], [0,0,1]
+2 - BOW : 
+
+Documents: d1 = [good boy], d2 = [good girl], d3 = [good boy girl].
+Vocabulary: good (appears 3 times), boy (2 times), girl (2 times).
+
+      good  boy  girl                               
+d1     1    1    0
+d2     1    0    1
+d3     1    1    1
+
+Disadvantage - Losing word order: BoW ignores the sequence of words in a document (e.g., "good boy" vs. "boy good").
+This means it loses contextual and syntactic information, which can be critical for understanding meaning in tasks like sentiment analysis or translation.7
+
+TF-IDF:
+Unlike Bag of Words, TF-IDF accounts for word rarity, making it better for identifying significant terms in large corpora.
+
+TF = number of reputation of words in sentences / number of words in the sentence  ;  IDF = log10(N/n)  ;  N = total number of documents(sentences)  ;  n = ns containins the word
+
+TF -IDF = TF * IDF
+
+
+
+- Word2 vec is method to generaate word embeddings , there is ways ContinuesBOW (smalldataset) (skipgram for larger)
+
+
+
+///////////////////////////// DAY 4 :
+
+1- word embeddings, word2vec(cbow/skipgram), practical example
+
+word embeddings is a technique which convert words into vectors andfor that there is two types :
+
+1 - counting of frequency (BOW/ TF-IDF/ OHE)   2- Trained models word2vec(cbow/skipgram)
+
+so in tf-idf and cbow we have symentic meaning problem (honnest, good) and sparer matrix (huge dimention), with the help of word2vec
+we will get limited dimention and sparssing is reduced (not many zeros in the matrix), simentic meaning
+
+How word embeddings works? : we will ellustrate an example using Cbow 
+we have:
+
+
+
+cbow training : uses contex words [Krish, Channel, RELATED, TO] to predict the word [is] and the goal is to learn vector representation where the words related to the target word in meaning
+word2vec output : the training generate word embeddings fir each word in the Corpus, this vectors capture simentic relationships so word with similair context get same vector representation
+
+Sentence and Setup
+
+Sentence: "yazid is data science student"
+Tokenized: ["yazid", "is", "data", "science", "student"]
+Vocabulary Size: 5
+Window Size: 4 (context includes 2 words before and 2 after the target, adjusted at boundaries)
+
+CBOW with Window Size = 4
+
+Target-Context Pairs:
+python g.py -e youneslyon47@gmail.com -p yazidov47 --file t.txt
+
+Target "yazid" → Context: [None, None, "is", "data"] (adjusted to ["is", "data"] at start, 2 available words)
+Target "is" → Context: ["yazid", None, "data", "science"] (adjusted to ["yazid", "data", "science"], 3 words due to start)
+Target "data" → Context: ["yazid", "is", "science", "student"]
+Target "science" → Context: ["is", "data", "student", None] (adjusted to ["is", "data", "student"], 3 words due to end)
+Target "student" → Context: ["data", "science", None, None] (adjusted to ["data", "science"], 2 words at end)
+
+
+One-Hot Encoding:
+
+Remains the same as before:
+
+"yazid" → [1, 0, 0, 0, 0]
+"is" → [0, 1, 0, 0, 0]
+"data" → [0, 0, 1, 0, 0]
+"science" → [0, 0, 0, 1, 0]
+"student" → [0, 0, 0, 0, 1]
+
+Fully connected layer : ANN
+
+we took a target word + context example: Target "data" → Context: ["is", "science"], project the matrix Weight input W = 5 *3 (vocab size * hidden size = window size) with initial random values
+
+
+[0.1, 0.2, 0.3]
+[0.4, 0.5, 0.6]
+[0.7, 0.8, 0.9]
+[0.1, 0.2, 0.3]
+[0.4, 0.5, 0.6]
+
+"is" ([0, 1, 0, 0, 0]) →  W_{input} * [0, 1, 0, 0, 0] = [0.4, 0.5, 0.6] $ (3×1)
+"science" ([0, 0, 0, 1, 0]) →  W_{input} * [0, 0, 0, 1, 0] = [0.1, 0.2, 0.3]  (3×1)
+
+(5*1) * (5*3) = 1*3
+Average Context:
+
+$[0.4, 0.5, 0.6] + [0.1, 0.2, 0.3]$ / 2 = [0.25, 0.35, 0.45] (3×1 hidden layer vector)
+
+Output Layer:
+
+[0.1, 0.2, 0.3, 0.4, 0.5]
+[0.6, 0.7, 0.8, 0.9, 0.1]
+[0.2, 0.3, 0.4, 0.5, 0.6]  *  Average Context [0.25, 0.35, 0.45] ≈ [0.305, 0.385, 0.465, 0.545, 0.325] (5×1 vector)
