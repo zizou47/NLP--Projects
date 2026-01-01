@@ -22,3 +22,20 @@ A comparative study of text classification models on the **dair-ai/emotion** dat
 ### 1. Local Models (FCNN + BiLSTM)
 ```bash
 pip install pandas nltk tensorflow scikit-learn matplotlib
+
+Open and run *.ipynb in Jupyter
+
+2. Best Model – DistilBERT (Recommended)
+
+Open Pretrained_model_GPU.ipynb in Google Colab
+Enable GPU: Runtime → Change runtime type → GPU
+Upload train.txt and test.txt
+Run all cells (~10 minutes)
+
+
+🔮 Quick Prediction (DistilBERT)
+
+from transformers import pipeline
+
+classifier = pipeline("text-classification", model="./your_saved_distilbert_model")
+print(classifier("I feel so happy today!"))  # → joy
